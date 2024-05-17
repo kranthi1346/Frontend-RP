@@ -4,6 +4,9 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 import CopyRightFooter from "./components/CopyRightFooter";
+import CustomToast from "./components/CustomToast.component";
+import { GlobalProvider } from "@/context/GlobalContext/Global.context";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,21 +23,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-cover bg-no-repeat backdrop-blur-50 w-full h-screen`}
+        className={`${inter.className} bg-fixed bg-cover bg-no-repeat backdrop-blur-50 w-full h-screen`}
         style={{
           backgroundImage: `url('/images/icons/svg/backgroundimage.svg')`,
         }}
       >
-        <div className="w-full h-screen">
-          <Navbar />
-          <div className="flex">
-            <Sidebar />
-            <div className="flex-1">
-              {children}
-              <CopyRightFooter />
+        
+          <GlobalProvider>
+            <CustomToast />
+            <div className="w-full h-screen">
+              <Navbar />
+              <div className="flex overflow-hidden">
+                <Sidebar />
+                <div className="flex-1 w-full">
+                  <div className="pl-[24px] pr-[31px] pt-[10px]">
+                    {children}
+                  </div>
+                  <CopyRightFooter />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </GlobalProvider>
+   
       </body>
     </html>
   );

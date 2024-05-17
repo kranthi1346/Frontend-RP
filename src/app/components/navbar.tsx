@@ -7,11 +7,13 @@ import searchicon from "../../../public/images/icons/svg/Search-icon.svg";
 import line from "../../../public/images/icons/svg/Line1.svg";
 import settingicon from "../../../public/images/icons/svg/setting-icon.svg";
 import notification from "../../../public/images/icons/svg/Notification.svg";
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [buttonColor, setButtonColor] = useState<{ [key: string]: string }>({});
   const [divColor, setDivColor] = useState<{ [key: string]: string }>({});
+  const { push } = useRouter();
 
   const handleButtonClick = (buttonId: string) => {
     setButtonColor({ ...buttonColor, [buttonId]: "orange" });
@@ -35,7 +37,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <div className="p-5 border-b-2 border-gray-950 border-opacity-10 py-[10x] ">
+    <div className="p-[0.75rem] border-b-2 border-gray-950 border-opacity-10">
       <nav className="flex">
         <div className="flex items-center">
           <div className="flex  ">
@@ -54,27 +56,13 @@ const Navbar: React.FC = () => {
             <input
               type="text"
               placeholder="Search Project, Resource Client and more"
-              className="py-[11px] px-[14px] pl-[10px] pr-[32px] w-[280px] bg-transparent"
-              style={{
-                paddingRight: "40px",
-              }}
+              className="py-[11px] px-[14px] pl-[10px] pr-[40px] w-[280px] bg-transparent focus:outline-none"
             />
-            <button className="absolute top-[8px] right-[13px] bg-transparent rounded-full p-[3px] focus:outline-none">
+            <button className="absolute top-[8px] right-[13px] bg-transparent rounded-full p-[3px]">
               <Image
                 src={searchicon}
                 alt="Search"
-                className="h-24 w-24 text-gray-300"
-                width={24}
-                height={24}
-                style={{
-                  width: "24px",
-                  height: "24px",
-                  top: "8px",
-                  left: "244px",
-                  padding: "3px",
-                  gap: "0px",
-                  opacity: "0px",
-                }}
+                className="h-[24px] w-[24px] text-gray-300 top-[8px] left-[244px] p-[3px] "
               />
             </button>
           </div>
@@ -119,7 +107,7 @@ const Navbar: React.FC = () => {
               fontFamily: "Lato, sans-serif",
               fontSize: "14px",
             }}
-            onClick={() => handleButtonClick("position")}
+            onClick={() => { handleButtonClick("position"); push('/positions') }}
           >
             Position
           </button>
