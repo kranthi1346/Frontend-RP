@@ -13,11 +13,10 @@ pipeline {
                 println "Deploying the applicaiton"
                 sh 'cd /var/lib/jenkins/workspace/RecPortal-FE-Dev'
                 sh 'pwd'
-                sh 'whoami'
+                sh 'npm start &' 
                 // sh 'sudo su -'
                 sh 'sudo systemctl restart nginx'
                 sh 'sudo systemctl status nginx'
-                sh 'npm start &' 
                 sh 'netstat -lntp'
                       }
   }
