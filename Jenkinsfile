@@ -12,7 +12,7 @@ pipeline {
           steps {
                 println "Deploying the applicaiton"
                 sh 'pwd'    
-                sh 'sshpass -p 'kranthi' scp -P 22 -r -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/RecPortal-FE-Dev/* kranthi@13.233.139.15:/home/kranthi/RecPortal' 
+                sh 'sshpass -p 'kranthi' scp -r -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/RecPortal-FE-Dev/* kranthi@13.233.139.15:/home/kranthi/RecPortal' 
                 sh 'npm start &' 
                 // sh 'sudo su -'
                 sh 'sudo systemctl restart nginx'
