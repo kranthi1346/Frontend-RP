@@ -8,11 +8,11 @@ pipeline {
                 sh 'pwd | ls -lrthr'
             }
         }
-         stage ('Deploy stage'){
+         stage ('Login to dev and deploy it'){
           steps {
-                println "Deploying the applicaiton"
-                sh 'cd /var/lib/jenkins/workspace/RecPortal-FE-Dev'
-                sh 'pwd'
+                println "Deploying the applicaiton
+                sh 'pwd'    
+                sh 'sshpass -p 'kranthi' scp -P 22 -r -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/RecPortal-FE-Dev/* kranthi@13.233.139.15:/home/kranthi/RecPortal' 
                 sh 'npm start &' 
                 // sh 'sudo su -'
                 sh 'sudo systemctl restart nginx'
