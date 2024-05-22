@@ -11,6 +11,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({ initialState = false, onTog
 
     const handleDocumentSubmissionClick = () => {
         const newState = !documentSubmission;
+        console.log(initialState)
         setDocumentSubmission(newState);
         onToggle(newState);
     };

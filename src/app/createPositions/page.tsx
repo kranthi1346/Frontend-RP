@@ -3,96 +3,158 @@
 import React, { FC, useEffect, useState } from "react";
 import KeySkillsSection from "../components/createPositions/keySkills.section";
 import Accordion from "../components/CustomAccordian.component";
+import DatePicker from "../components/CustomDatePicker.component";
 import PositionInterviewProcess from "../components/createPositions/position.interviewProcess";
 import EssentialInformationSection from "../components/createPositions/essentialInformation.section";
 import PositionDetailsSection from "../components/createPositions/positionDetails.section";
 import { JobDescriptionComponent } from "../components/createPositions/jobDescriptions.section";
 import { AdditionalDetailComponent } from "../components/createPositions/additionalDetails.section";
-import AdditionalPositionsDetail from "../components/createPositions/additionalPositionDetails.section";
-import withReduxSaga from "../../..";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMasterDataStart } from "@/redux/positionRedux/action";
-import { postPositionData } from "@/services/service";
-import { useGlobalContext } from "@/context/GlobalContext/Global.context";
-import { useRouter } from "next/navigation";
 
 interface ComponentState {
     [key: string]: any;
 }
 
-interface MasterData {
-    [key: string]: { id: number; value: string }[];
-}
-interface PayloadState {
-    [key: string]: string | number | boolean | string[] | number[] | undefined;
-}
-const mockPayload = {
-    "positionType": 1,
-    "clientType": 1,
-    "clientName": "",
-    "positionPriority": 1,
-    "positionTitle": "",
-    "department": 1,
-    "totalPosition": "",
-    "experienceLevel": 1,
-    "shiftTiming": 1,
-    "educationalRequirement": "",
-    "remoteAvailable": false,
-    "billabilityType": 1,
-    "billableHours": 1,
-    "city": "",
-    "state": "",
-    "country": "",
-    "workType": 1,
-    "minBudget": 0,
-    "maxBudget": 0,
-    "minPayPcale": 0,
-    "maxPayScale": 0,
-    "dateOpened": "",
-    "targetDate": "",
-    "hiringManager": "",
-    "addPrimarySkills": [],
-    "addSecondarySkills": [],
-    "addJobDescription": "",
-    "additionalDetails": "",
-    "documentSubmission": false,
-    "fitmentApproval": false,
-    "salaryNegotiation": false,
-    "interviewProcess": [],
-    "status": "DRAFT",
-    "isActive": false,
-    "isDeleted": false
-}
-
-const CreatePositonPage = () => {
-    const dispatch = useDispatch();
-    const { push } = useRouter();
-    const [masterData, setMasterData] = useState<MasterData>({});
-    const positionMasterData = useSelector(
-        (state: any) => state?.positionDataReducer?.responseData
-    );
-    const [payload, setPayload] = useState<PayloadState>(mockPayload);
-    const [submitButtonActive, setSubmitButtonActive] = useState(false);
-    const { updateShowCustomToast } = useGlobalContext();
-
-
-    useEffect(() => {
-        dispatch(fetchMasterDataStart());
-    }, [dispatch]);
-
-    useEffect(() => {
-        setMasterData(positionMasterData)
-    }, [positionMasterData])
-
+export default function CreatePositonPage() {
+    const masterData =
+    {
+        "positionType": [
+            {
+                "id": 1,
+                "data": "In-House"
+            },
+            {
+                "id": 2,
+                "data": "Client"
+            }
+        ],
+        "clientType": [
+            {
+                "id": 1,
+                "data": "Existing"
+            },
+            {
+                "id": 2,
+                "data": "New"
+            }
+        ],
+        "workType": [
+            {
+                "id": 1,
+                "data": "Full Time"
+            },
+            {
+                "id": 2,
+                "data": "Part Time"
+            },
+            {
+                "id": 3,
+                "data": "C2H"
+            }
+        ],
+        "positionPriority": [
+            {
+                "id": 1,
+                "data": "Low"
+            },
+            {
+                "id": 2,
+                "data": "Medium"
+            },
+            {
+                "id": 3,
+                "data": "High"
+            },
+            {
+                "id": 4,
+                "data": "Critical"
+            }
+        ],
+        "experienceLevel": [
+            {
+                "id": 1,
+                "data": "0 - 1 Years"
+            },
+            {
+                "id": 2,
+                "data": "1 - 3 Years"
+            },
+            {
+                "id": 3,
+                "data": "3 - 6 Years"
+            },
+            {
+                "id": 4,
+                "data": "6 - 9 Years"
+            },
+            {
+                "id": 4,
+                "data": "10 Years or More"
+            }
+        ],
+        "shiftTiming": [
+            {
+                "id": 1,
+                "data": "Day"
+            },
+            {
+                "id": 2,
+                "data": "Mid"
+            },
+            {
+                "id": 3,
+                "data": "Night"
+            },
+            {
+                "id": 4,
+                "data": "Rotational"
+            }
+        ],
+        "billabilityType": [
+            {
+                "id": 1,
+                "data": "Billable"
+            },
+            {
+                "id": 2,
+                "data": "Non- Billable"
+            }
+        ],
+        "billableHours": [
+            {
+                "id": 1,
+                "data": "4 Hours"
+            },
+            {
+                "id": 2,
+                "data": "8 Hours"
+            }
+        ],
+        "department": [
+            {
+                "id": 1,
+                "data": "Designer"
+            },
+            {
+                "id": 2,
+                "data": "Developement"
+            },
+            {
+                "id": 3,
+                "data": "Operation"
+            },
+            {
+                "id": 4,
+                "data": "Production"
+            }
+        ]
+    }
     const [pageState, setPageState] = useState<ComponentState>({
         essentialInfo: {}, // Initialize with empty objects
         positionDetails: {},
         keySkills: {},
-        addJobDescription: "",
-        additionalDetails: "",
-        AdditionalPositionsDetail: {}
+        jobDescription: "",
+        additionalDetails: ""
     });
-
 
     const setComponentState = <T extends keyof ComponentState>(componentName: T, state: ComponentState[T]): void => {
         setPageState(prevState => ({
@@ -101,78 +163,7 @@ const CreatePositonPage = () => {
         }));
     };
 
-    useEffect(() => {
 
-        const updatedPayload: PayloadState = { ...payload };
-        const flattenedPageState = {
-            ...pageState.essentialInfo,
-            ...pageState.positionDetails,
-            ...pageState.keySkills,
-            ...pageState.AdditionalPositionsDetail,
-            addJobDescription: pageState.addJobDescription,
-            additionalDetails: pageState.additionalDetails
-        };
-        Object.keys(flattenedPageState).forEach(key => {
-            updatedPayload[key] = flattenedPageState[key] ? flattenedPageState[key] : updatedPayload[key]; // Update corresponding key in payload
-        });
-        setPayload(updatedPayload)
-    }, [pageState]);
-
-    useEffect(() => {
-        let essentialInfo = false
-
-        if (Object.keys(pageState?.essentialInfo)?.length === 11) {
-            essentialInfo = true
-        }
-        let positionDetails = false
-
-        if (Object.keys(pageState?.positionDetails)?.length === 9) {
-            positionDetails = true
-        }
-
-        let keySkills = false
-
-        if (Object.keys(pageState?.keySkills)?.length === 2) {
-            keySkills = true
-        }
-
-
-        let AdditionalPositionsDetail = false
-
-        if (Object.keys(pageState?.AdditionalPositionsDetail)?.length === 3) {
-            AdditionalPositionsDetail = true
-        }
-        if (essentialInfo && keySkills && positionDetails && AdditionalPositionsDetail && pageState?.addJobDescription && pageState?.additionalDetails) {
-            setSubmitButtonActive(true)
-        }
-
-    }, [payload])
-
-    const handleButtonClick = () => {
-        try {
-            postPositionData(payload).then(resp => {
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth" // Smooth scrolling behavior
-                });
-                console.log(resp);
-                if (resp?.statusCode >= 200 && resp?.statusCode <= 300 && resp?.success) {
-                    updateShowCustomToast("SUCCESS", "Position Saved as draft.");
-                    push('/positions')
-                } else {
-                    updateShowCustomToast("ERROR", "Failed to add Position.");
-
-                }
-            })
-        } catch (error) {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth" // Smooth scrolling behavior
-            });
-            updateShowCustomToast("ERROR", "Failed to add Position.");
-        }
-    };
     return (
 
         <div className=" mx-auto px-4 ">
@@ -192,8 +183,11 @@ const CreatePositonPage = () => {
 
                 <Accordion title="Additional position Details">
                     <div className="w-full px-[10px] lg:px-[15px] xl:px-[30px] py-[10px]">
-                        <AdditionalPositionsDetail setComponentState={setComponentState} />
-
+                        <DatePicker
+                            inputHeaderText={"saddsa"}
+                            placeholderText={'adsadsa'}
+                            onChange={() => { }}
+                            onBlur={() => { }} />
                     </div>
                 </Accordion>
                 <Accordion title="Key Skills">
@@ -212,10 +206,7 @@ const CreatePositonPage = () => {
                 </Accordion>
                 <Accordion title="Define stages And Interview Process">
                     <div className="w-full px-[10px] lg:px-[15px] xl:px-[30px] py-[10px]">
-                        <PositionInterviewProcess
-                            onToggle={() => { }}
-                            submitButtonActive={submitButtonActive}
-                            onClick={handleButtonClick} />
+                        <PositionInterviewProcess onToggle={() => { }} />
                     </div>
                 </Accordion>
 
@@ -226,6 +217,3 @@ const CreatePositonPage = () => {
         </div>
     );
 }
-
-export default withReduxSaga(CreatePositonPage);
-

@@ -194,7 +194,7 @@ const DropdownWithSearch: React.FC<DropdownWithSearchProps> = ({
                 selectedItems[selectedItemIndex].selected;
               return (
                 <div
-                  key={index}
+                key={index}
                   onClick={() => handleItemClick(item.name)}
                   className="flex items-center gap-[10px] cursor-pointer"
                 >

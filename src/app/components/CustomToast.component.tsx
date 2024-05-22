@@ -3,9 +3,9 @@ import React, { FC, useEffect, useState } from "react";
 import { useGlobalContext } from "@/context/GlobalContext/Global.context";
 import CustomImage from "./CustomImage.component";
 
-interface CustomToastProps { }
+interface CustomToastProps {}
 
-const CustomToast: FC<CustomToastProps> = ({ }) => {
+const CustomToast: FC<CustomToastProps> = ({}) => {
   const {
     toastText,
     toastType,
@@ -67,7 +67,7 @@ const CustomToast: FC<CustomToastProps> = ({ }) => {
     <>
       {showCustomToast && (
         <div
-          style={{ borderLeftColor: headingTextColor(), zIndex: '999' }}
+          style={{ borderLeftColor: headingTextColor() }}
           className="absolute w-[500px] h-[54px] bg-[#FFFFFF] right-[31px] top-[95px] rounded-[4px] border-l-[2px] pt-[6px] pl-[9px] pr-[6px] pb-[4px]"
         >
           <div className="flex gap-[7px]">

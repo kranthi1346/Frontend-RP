@@ -4,7 +4,7 @@ import ValueType from 'react-select';
 
 interface DropdownOption {
     id: number;
-    value: string;
+    data: string;
 }
 
 interface DropdownSingleSelectWithLabelProps {
@@ -40,7 +40,7 @@ const DropdownSingleSelectWithLabel: React.FC<DropdownSingleSelectWithLabelProps
                 placeholder={placeholderText}
                 value={selectedOption}
                 onChange={handleSelectChange}
-                options={options?.map(option => ({ value: option.value, label: option.value, id: option.id }))}
+                options={options?.map(option => ({ value: option.data, label: option.data, id: option.id, data: option.data }))}
                 classNamePrefix={"my-custom-react-select"}
                 styles={{
                     placeholder: base => ({

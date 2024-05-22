@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import CustomInputSkill from "../../components/CustomInputSkill.component";
 
 interface KeySkillsSectionProps {
-    setComponentState: (componentName: string, state: { addPrimarySkills: string[], addSecondarySkills: string[] }) => void;
+    setComponentState: (componentName: string, state: { primarySkills: string[], secondarySkills: string[] }) => void;
 }
 
 
 const KeySkillsSection: React.FC<KeySkillsSectionProps> = ({ setComponentState }) => {
-    const [formData, setFormData] = useState<{ addPrimarySkills: string[], addSecondarySkills: string[] }>({
-        addPrimarySkills: [],
-        addSecondarySkills: [],
+    const [formData, setFormData] = useState<{ primarySkills: string[], secondarySkills: string[] }>({
+        primarySkills: [],
+        secondarySkills: [],
     });
 
     const handlePrimarySkillsChange = (newSkills: string[]) => {
-        setFormData({ ...formData, addPrimarySkills: newSkills });
+        setFormData({ ...formData, primarySkills: newSkills });
     };
 
     const handleSecondarySkillsChange = (newSkills: string[]) => {
-        setFormData({ ...formData, addSecondarySkills: newSkills });
+        setFormData({ ...formData, secondarySkills: newSkills });
     };
     useEffect(() => {
         setComponentState('keySkills', formData);

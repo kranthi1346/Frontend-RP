@@ -16,11 +16,18 @@ const CKEditorComponent: React.FC<{
     //     };
   };
 
+  const handleChange = (event: any) => {
+    // const data = editor.getData();
+    // console.log('handleChange ck data',data );
+  };
+
   const handleBlur = (event: any, editor: any) => {
     const data = editor.getData();
+    console.log("handleBlur ck data", data);
   };
 
   const handleFocus = (event: any, editor: any) => {
+    console.log("Focus.", editor);
   };
 
   return (

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import DropdownSingleSelectWithLabel from '../dropdowns/DropdownSingleSelectWithLabel.component';
 import CustomInputField from '../CustomInputField.component';
-import IncomeButton from '../CustomRangeInput.component';
 
 interface PositionDetailsSectionProps {
     masterData: {
-        [key: string]: { id: number; value: string }[];
+        [key: string]: { id: number; data: string }[];
     };
     setComponentState: (componentName: string, state: { [key: string]: string }) => void;
 }
@@ -14,12 +13,7 @@ interface DropdownOption {
     data: string;
 }
 const PositionDetailsSection: React.FC<PositionDetailsSectionProps> = ({ masterData, setComponentState }) => {
-    const [formData, setFormData] = useState<{ [key: string]: string }>({
-        minBudget: '',
-        maxBudget: '',
-        minPayScale: '',
-        maxPayScale: ''
-    });
+    const [formData, setFormData] = useState<{ [key: string]: string }>({});
     const [remoteAvailable, setRemoteAvailable] = useState(false);
 
     const handleChange = (name: string, selectedOption: any) => {
@@ -36,25 +30,6 @@ const PositionDetailsSection: React.FC<PositionDetailsSectionProps> = ({ masterD
             [name]: value
         }));
     };
-
-    // Function to handle values change from IncomeButton component for Budget
-    const handleBudgetChange = (minValue: string, maxValue: string) => {
-        setFormData(prevState => ({
-            ...prevState,
-            minBudget: minValue,
-            maxBudget: maxValue
-        }));
-    };
-
-    // Function to handle values change from IncomeButton component for Pay Scale
-    const handlePayScaleChange = (minValue: string, maxValue: string) => {
-        setFormData(prevState => ({
-            ...prevState,
-            minPayScale: minValue,
-            maxPayScale: maxValue
-        }));
-    };
-
 
     useEffect(() => {
         setComponentState('positionDetails', formData);
@@ -123,23 +98,16 @@ const PositionDetailsSection: React.FC<PositionDetailsSectionProps> = ({ masterD
                 </div>
 
             </div>
-            <div className="flex flex-wrap items-center gap-4">
-                <div className="w-full sm:w-1/2 lg:w-[49%]  xl:w-[40%] p-2">
-                    <IncomeButton
-                        title={'Enter Budget Range'}
-                        label2={'Max Budget*'}
-                        label1={'Min Budget'}
-                        onValuesChange={handleBudgetChange} // Pass the callback function for Budget
-                    />
+            <div className="flex flex-wrap items-center">
+                <div className="w-full sm:w-1/2 lg:w-[20%]  xl:w-[26%] p-2">
+
+
+
                 </div>
-                <div className="w-full sm:w-1/2 lg:w-[49%]  xl:w-[40%] p-2">
-                    <IncomeButton
-                        title={'Enter Pay Scale*'}
-                        label2={'Max Pay Scale'}
-                        label1={'Min Pay Scale*'}
-                        onValuesChange={handlePayScaleChange} // Pass the callback function for Pay Scale
-                    />
+                <div className="w-full sm:w-1/2 lg:w-[14%]  xl:w-[12%] p-2">
+
                 </div>
+
             </div>
         </>
     );

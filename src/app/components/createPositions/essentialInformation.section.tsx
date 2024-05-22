@@ -4,7 +4,7 @@ import CustomInputField from '../CustomInputField.component';
 
 interface EssentialInformationSectionProps {
     masterData: {
-        [key: string]: { id: number; value: string }[];
+        [key: string]: { id: number; data: string }[];
     };
     setComponentState: (componentName: string, state: { [key: string]: string }) => void;
 }
@@ -32,6 +32,7 @@ const EssentialInformationSection: React.FC<EssentialInformationSectionProps> = 
     };
     const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, checked } = event.target;
+        console.log(checked);
         setRemoteAvailable(checked);
         setFormData(prevState => ({
             ...prevState,
@@ -109,11 +110,11 @@ const EssentialInformationSection: React.FC<EssentialInformationSectionProps> = 
                 </div>
                 <div className="w-full sm:w-1/3 lg:w-[16%]  xl:w-[26%] p-2">
                     <CustomInputField
-                        keyName="positionTitle"
+                        keyName="positionTitile"
                         inputHeaderText="Position Title"
                         placeholderText="Enter position title"
                         errorText="" // Add error text logic if needed
-                        value={formData.positionTitle || ''}
+                        value={formData.positionTitile || ''}
                         onChange={handleInputChange}
                     />
                 </div>

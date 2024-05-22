@@ -3,16 +3,13 @@ import React, { useState } from 'react';
 import CustomButtons from '../CustomButtons.component';
 import DropdownSingleSelect from '../dropdowns/DropdownSingleSelect.component';
 import CustomImage from '../CustomImage.component';
-import { useGlobalContext } from '@/context/GlobalContext/Global.context';
 
 interface PositionInterviewProcessProps {
     initialState?: boolean;
-    onClick: () => void; // Corrected type for onClick
     onToggle: (state: boolean) => void;
-    submitButtonActive: boolean;
 }
 
-const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ initialState = false, onToggle, submitButtonActive, onClick }) => {
+const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ initialState = false, onToggle }) => {
     const [documentSubmission, setDocumentSubmission] = useState<boolean>(initialState);
     const [fitmentApproval, setFitmentApproval] = useState<boolean>(initialState);
     const [salaryNegotiation, setSalaryNegotiation] = useState<boolean>(initialState);
@@ -20,7 +17,10 @@ const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ ini
     const [newlevel, setnewLevel] = useState(false);
     const [numInterviewers, setNumInterviewers] = useState(1);
     const [selectedOption, setSelectedOption] = useState<{ id: string; label: string }>()
-    const { updateShowCustomToast } = useGlobalContext();
+
+
+
+
 
 
     const handleDocumentSubmissionClick = () => {
@@ -67,19 +67,8 @@ const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ ini
 
     const handleDropdownChange = (selectedOption: { id: string; label: string }) => {
         setSelectedOption(selectedOption);
+        console.log("Selected Option:", selectedOption);
     };
-
-    const warringCall = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth" // Smooth scrolling behavior
-        });
-        updateShowCustomToast(
-            "WARNING",
-            "Please Select All fields"
-        );
-
-    }
 
     return (
         <div>
@@ -194,7 +183,7 @@ const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ ini
                                 <CustomButtons
                                     buttonType="border"
                                     title="Save as Draft"
-                                    onClick={submitButtonActive ? onClick : warringCall}
+                                    onClick={() => { }}
                                     fontColor="text-[#2578C3]"
                                     fontWeight='700'
                                     fontSize="12px"
@@ -207,7 +196,7 @@ const PositionInterviewProcess: React.FC<PositionInterviewProcessProps> = ({ ini
                                 <CustomButtons
                                     buttonType="border"
                                     title="Assign "
-                                    onClick={submitButtonActive ? onClick : warringCall}
+                                    onClick={() => { }}
                                     fontColor="text-white"
                                     fontSize="12px"
                                     fontWeight='700'

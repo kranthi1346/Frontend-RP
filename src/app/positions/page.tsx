@@ -28,6 +28,15 @@ const ParentComponent = () => {
     dispatch(fetchMasterDataStart());
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log("isFetchingPositionMasterData = ", isFetchingPositionMasterData);
+    console.log("positionMasterData = ", positionMasterData);
+    console.log("positionMasterDataError = ", positionMasterDataError);
+  }, [
+    isFetchingPositionMasterData,
+    positionMasterData,
+    positionMasterDataError,
+  ]);
 
   return (
     <div className=" mx-auto px-4 ">

@@ -5,7 +5,6 @@ interface DatePickerProps {
     placeholderText: string;
     onChange: (date: Date | null) => void;
     onBlur?: () => void;
-    onDateSelect: (date: Date | null) => void; // New prop
 }
 
 const DatePicker: FC<DatePickerProps> = ({
@@ -13,7 +12,6 @@ const DatePicker: FC<DatePickerProps> = ({
     placeholderText = "",
     onChange,
     onBlur,
-    onDateSelect, // New prop
 }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null); // State to hold selected date
 
@@ -24,20 +22,18 @@ const DatePicker: FC<DatePickerProps> = ({
             const parsedDate = new Date(dateValue);
             if (!isNaN(parsedDate.getTime())) {
                 setSelectedDate(parsedDate);
-                onChange(parsedDate); // Call onChange from props
-                onDateSelect(parsedDate); // Call onDateSelect with selected date
+                onChange(parsedDate);
             }
         } else {
             setSelectedDate(null);
             onChange(null);
-            onDateSelect(null); // Call onDateSelect with null if date is cleared
         }
     };
 
     return (
         <div>
             <div
-                className={`w-full  rounded-lg top-[15px] shadow-[0_3px_6px_0px_rgba(126,123,160,0.08)] `}
+                className={`w-full sm:w-[200 px]  lg:w-[362px] xl:w-[362px]  rounded-lg top-[15px] shadow-[0_3px_6px_0px_rgba(126,123,160,0.08)] `}
                 style={{ background: '#FAFAFF', opacity: 0.79 }}
             >
                 <div className="relative">
@@ -52,7 +48,7 @@ const DatePicker: FC<DatePickerProps> = ({
                             placeholder={placeholderText}
                             className="h-[30px] w-[92%] text-[16px] ml-[10px]  pr-3 focus:outline-none mb-[2px] rounded-lg border border-none"
                             onBlur={onBlur}
-                            style={{ background: '#FAFAFF', opacity: 1 }}
+                            style={{ background: '#FAFAFF', opacity: 0.79 }}
                         />
                     </div>
                 </div>
